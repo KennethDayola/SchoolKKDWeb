@@ -1,0 +1,183 @@
+
+body {
+  margin: 0;
+  display: flex;
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fafbfc;
+}
+
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.content,
+.main-content {
+  margin-left: 250px;
+  padding: 2rem;
+  flex: 1;
+  background: #f9f9f9;
+}
+
+/* === Sidebar Styles === */
+.side-navbar {
+  font-size: 14px;
+  background-color: #24252A;
+  padding: 8px;
+  width: 160px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-right: 1px solid #ca1cff;
+}
+
+.side-navbar ul {
+  list-style-type: none;
+  padding-left: 0;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.section-head {
+  margin-left: 5px;
+  font-size: 0.6rem;
+  font-weight: 200;
+  margin-bottom: 18px;
+  color: white;
+}
+
+.white-separator {
+  height: 0.85px;
+  background: #a2a8a8;
+  width: calc(100% + 16px);
+  margin-left: -8px;
+  position: relative;
+}
+
+/* === Profile Area === */
+.sidebar-fullname {
+  display: block;
+  font-size: 0.8rem;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.profile-pic,
+.prof-pic {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: background-color 0.3s ease, padding 0.3s ease, transform 0.2s ease;
+}
+
+.prof-pic {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 15px;
+}
+
+.profile-link {
+  text-decoration: none;
+  transition: background-color 0.3s ease, padding 0.3s ease, transform 0.2s ease;
+}
+
+.profile-link:hover {
+  background-color: #171818;
+  padding: 13px 5px;
+  border-radius: 15px;
+}
+
+.profile-link:hover .prof-pic {
+  transform: translateX(-50%) scale(1.05);
+}
+
+.profile-link:hover .sidebar-fullname {
+  color: white;
+  background: none;
+}
+
+/* === Navigation Links === */
+.nav-link {
+  margin: 10px 0 15px;
+  transition: background-color 0.3s ease, padding 0.3s ease, transform 0.2s ease;
+}
+
+.nav-link a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  padding: 13px 5px;
+  background-color: #171818;
+  color: #5C6060;
+  border-radius: 4px;
+}
+
+.nav-link:hover a {
+  color: #C1C7C7;
+  padding: 13px 0;
+}
+
+/* === Spacers === */
+.small-space {
+  width: 100%;
+  height: 10px;
+}
+
+.medium-space {
+  width: 100%;
+  height: 20px;
+}
+
+/* === Study Load / Main Content === */
+.study-load-container {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+#saveBtn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+#statusMessage {
+  margin-top: 15px;
+  font-weight: bold;
+}

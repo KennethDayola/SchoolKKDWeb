@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Load</title>
+  <link rel="stylesheet" href="studyload.css">
+  <link rel="stylesheet" href="sidebar.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="top-navbar">
+    <ul class="nav-list left-nav">
+      <li class="nav-item title-name">SCHOOL</li>
+      <li class="nav-item title-name-bold">KKD</li>
+    </ul>
+    <ul class="nav-list right-nav">
+      <li class="nav-item">About</li>
+      <li class="nav-item">Contact Us</li>
+    </ul>
+  </div>
+
+  <div class="wrapper">
+    <iframe src="sidebar.html" class="sidebar-frame"></iframe>
+  </div>
+
+  <div class="content">
+    <div class="main-content">
+      <div class="page-header">
+        <h2>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18"/>
+          </svg>
+          Study Load
+        </h2>
+        <div class="welcome-message">
+          <span class="greeting">Welcome,</span>
+          <span class="student-name" id="studentName">Loading...</span>
+        </div>
+      </div>
+
+      <div class="study-load-container">
+        <div class="study-load-header">
+          <div class="total-units">
+            <span class="label">Total Units:</span>
+            <span class="value" id="totalUnits">0</span>
+          </div>
+          <div class="semester-info">
+            <span class="label">Current Semester:</span>
+            <span class="value" id="currentSemester">Loading...</span>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="study-load-table">
+            <thead>
+              <tr>
+                <th>EDP Code</th>
+                <th>Subject Code</th>
+                <th>Subject Name</th>
+                <th>Schedule</th>
+                <th>Room</th>
+                <th>Units</th>
+              </tr>
+            </thead>
+            <tbody id="study-load-body">
+              <tr>
+                <td colspan="6" class="loading-message">
+                  <div class="loading-spinner"></div>
+                  <span>Loading study load...</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="error-message" class="error-message" style="display: none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <span>Failed to load study load. Please try again later.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const studentId = localStorage.getItem("studentId");
+    const studentName = localStorage.getItem("studentName") || "Student";
+
+    // Update student name in the header
+    document.getElementById("studentName").textContent = studentName;
+
+    if (!studentId) {
+      showError("Student ID not found. Please log in again.");
+    } else {
+      fetchStudyLoad();
+    }
+
+    function fetchStudyLoad() {
+      fetch(`/study-load/${studentId}`)
+        .then(response => {
+          if (!response.ok) throw new Error("Failed to fetch study load");
+          return response.json();
+        })
+        .then(data => {
+          const tbody = document.getElementById("study-load-body");
+          tbody.innerHTML = ""; // Clear loading message
+
+          if (!data.studyLoad || data.studyLoad.length === 0) {
+            tbody.innerHTML = `
+              <tr>
+                <td colspan="6" class="no-data-message">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+                    <path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/>
+                  </svg>
+                  <span>No subjects enrolled for this semester.</span>
+                </td>
+              </tr>
+            `;
+            return;
+          }
+
+          let totalUnits = 0;
+          data.studyLoad.forEach(subject => {
+            totalUnits += subject.units || 0;
+            const row = `
+              <tr>
+                <td>${subject.edp_code}</td>
+                <td>${subject.subject_code}</td>
+                <td>${subject.subject_name}</td>
+                <td>
+                  <div class="schedule-info">
+                    <span class="time">${subject.start_time} - ${subject.end_time}</span>
+                    <span class="days">${subject.days}</span>
+                  </div>
+                </td>
+                <td>${subject.room || 'TBA'}</td>
+                <td>${subject.units}</td>
+              </tr>
+            `;
+            tbody.insertAdjacentHTML("beforeend", row);
+          });
+
+          // Update total units
+          document.getElementById("totalUnits").textContent = totalUnits;
+          
+          // Update current semester (you might want to get this from the API)
+          document.getElementById("currentSemester").textContent = "First Semester 2023-2024";
+        })
+        .catch(err => {
+          console.error("Failed to load study load:", err);
+          showError("Failed to load study load. Please try again later.");
+        });
+    }
+
+    function showError(message) {
+      const errorDiv = document.getElementById("error-message");
+      errorDiv.querySelector("span").textContent = message;
+      errorDiv.style.display = "flex";
+      document.getElementById("study-load-body").innerHTML = "";
+    }
+  </script>
+</body>
+</html>

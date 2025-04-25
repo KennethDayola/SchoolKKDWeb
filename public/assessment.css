@@ -1,0 +1,175 @@
+
+ .side-navbar {
+   font-size: 14px;
+  background-color: #24252A;
+  padding: 8px; /* Reduced padding */
+  width: 160px; /* Reduced width */
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-right: 1px solid #ca1cff; 
+}
+
+
+.profile-pic {
+    width: 40px; /* Adjust width based on your preference */
+    height: 40px; /* Adjust height */
+    border-radius: 50%; /* Make it a circle */
+    object-fit: cover; /* Ensure the image is properly cropped */
+    border: 2px solid #fff; /* Optional: Add a white border around the image */
+}
+
+
+.profile-link{
+  transition: background-color 0.3s ease, padding 0.3s ease, transform 0.2s ease;
+      text-decoration: none;
+
+}
+
+.small-space {
+  width: 100%;
+  height: 10px;
+}
+
+.medium-space {
+  width: 100%;
+  height: 20px;
+}
+
+.prof-pic {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 15px;
+  border-radius: 50%;
+  object-fit: cover;
+    transition: background-color 0.3s ease, padding 0.3s ease, transform 0.2s ease;
+}
+
+.white-separator {
+  height: 0.85px;
+  background: #a2a8a8;
+  width: 100%;
+  margin-left: -8px; /* Align to sidebar edges */
+  width: calc(100% + 16px); /* Adjust width to compensate for sidebar padding */
+  position: relative;
+}
+
+.section-head {
+  margin-left: 5px;
+  font-size: 0.6rem;
+  font-weight: 200;
+  margin-bottom: 18px;
+  color: white;
+}
+
+.sidebar-fullname {
+  display: block;
+  font-size: 0.8rem;
+  text-align: center;
+    margin-left: 0px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+ color : #ffffff;
+  text-decoration: none;
+}
+
+.side-navbar ul {
+  position: relative;
+  list-style-type: none;
+  padding-left: 0;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.profile-link:hover {
+  background-color: #171818;
+      padding: 13px 5px;
+    border-radius: 15px;
+
+
+}
+
+.profile-link:hover .prof-pic {
+  transform: translateX(-50%) scale(1.05);
+
+}
+
+.profile-link a {
+    text-decoration: none; /* Removes underline */
+
+}
+
+.profile-link:hover .sidebar-fullname {
+    color: white;
+    text-decoration: none;
+    background: none; /* Ensure no background change on hover */
+}
+
+
+.nav-link {
+  margin: 10px 0; /* Reduced margin */
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease, padding 0.3s ease, transform 0.2s ease;
+
+}
+
+.nav-link a {
+  color : #ffffff;
+  text-decoration: none;
+}
+
+
+.nav-link:hover {
+      padding: 13px 5px;
+  background-color: #171818;
+  color: #5C6060;
+  border-radius: 4px;
+}
+
+.nav-link:hover a {
+    padding: 13px 0px;
+  color: #C1C7C7; 
+}
+
+/* Ensuring SVG color changes with text */
+.nav-link:hover a svg {
+  stroke: #C1C7C7; 
+}
+
+ body {
+    background-color: #fafbfc;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.content-area {
+  padding: 2rem;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+  margin-left: 250px; /* adjusts for sidebar */
+}
+
+h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.assessment-box {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+}
+
+.assessment-box p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
