@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Details</title>
+  <link rel="stylesheet" href="contact-details.css">
+  <link rel="stylesheet" href="sidebar.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="top-navbar">
+    <ul class="nav-list left-nav">
+      <li class="nav-item title-name">SCHOOL</li>
+      <li class="nav-item title-name-bold">KKD</li>
+    </ul>
+    <ul class="nav-list right-nav">
+      <li class="nav-item">About</li>
+      <li class="nav-item">Contact Us</li>
+    </ul>
+  </div>
+
+  <div class="wrapper">
+    <iframe src="sidebar.html" class="sidebar-frame"></iframe>
+  </div>
+
+  <div class="content">
+    <div class="left-container" id="leftContainer">
+      <div class="expand-toggle" onclick="toggleLeftContainer()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </div>
+      <div class="left-content">
+        <h3>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          Steps
+        </h3>
+        <div class="steps-container">
+          <div class="step active">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">Updating of Contact Details</div>
+              <div class="step-description">Update your personal information</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">Admin Evaluation and Approval</div>
+              <div class="step-description">Wait for admin verification</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">Subject Selection</div>
+              <div class="step-description">Choose your desired subjects</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <div class="step-title">Subjects Approval</div>
+              <div class="step-description">Wait for subject approval</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <div class="step-title">Officially Enrolled</div>
+              <div class="step-description">Complete enrollment process</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-content">
+      <h2>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        CONTACT DETAILS
+      </h2>
+      
+      <form id="contactDetailsForm" class="contact-form">
+        <div class="form-section">
+          <h3>Personal Information</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="civilStatus">Civil Status</label>
+              <select id="civilStatus" name="civilStatus" required>
+                <option value="">Select Civil Status</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Widowed">Widowed</option>
+                <option value="Separated">Separated</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="birthDate">Birth Date</label>
+              <input type="date" id="birthDate" name="birthDate" required>
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>Contact Information</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group full-width">
+              <label for="address">Complete Address</label>
+              <textarea id="address" name="address" rows="3" required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>Parent/Guardian Information</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="parentName">Parent/Guardian Name</label>
+              <input type="text" id="parentName" name="parentName" required>
+            </div>
+            <div class="form-group">
+              <label for="parentContact">Parent/Guardian Contact</label>
+              <input type="tel" id="parentContact" name="parentContact" required>
+            </div>
+            <div class="form-group">
+              <label for="parentRelationship">Relationship</label>
+              <select id="parentRelationship" name="parentRelationship" required>
+                <option value="">Select Relationship</option>
+                <option value="Father">Father</option>
+                <option value="Mother">Mother</option>
+                <option value="Guardian">Guardian</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="submit-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+              <polyline points="17 21 17 13 7 13 7 21"></polyline>
+              <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+            Save Contact Details
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function toggleLeftContainer() {
+      const container = document.getElementById('leftContainer');
+      container.classList.toggle('collapsed');
+    }
+
+    document.getElementById('contactDetailsForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = {
+        civilStatus: document.getElementById('civilStatus').value,
+        birthDate: document.getElementById('birthDate').value,
+        gender: document.getElementById('gender').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        address: document.getElementById('address').value,
+        parentName: document.getElementById('parentName').value,
+        parentContact: document.getElementById('parentContact').value,
+        parentRelationship: document.getElementById('parentRelationship').value
+      };
+
+      try {
+        const response = await fetch('/api/update-contact-details', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          alert('Contact details updated successfully!');
+          window.location.href = '/enrollment.html';
+        } else {
+          const error = await response.json();
+          alert(error.message || 'Failed to update contact details');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while updating contact details');
+      }
+    });
+
+    // Load existing data if available
+    async function loadExistingData() {
+      try {
+        const response = await fetch('/api/student-details');
+        if (response.ok) {
+          const data = await response.json();
+          // Populate form fields with existing data
+          Object.keys(data).forEach(key => {
+            const element = document.getElementById(key);
+            if (element) {
+              element.value = data[key];
+            }
+          });
+        }
+      } catch (error) {
+        console.error('Error loading existing data:', error);
+      }
+    }
+
+    // Load data when page loads
+    window.onload = loadExistingData;
+  </script>
+</body>
+</html> 

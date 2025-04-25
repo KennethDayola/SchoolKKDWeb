@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prospectus</title>
+  <link rel="stylesheet" href="prospectus.css">
+  <link rel="stylesheet" href="sidebar.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="top-navbar">
+    <ul class="nav-list left-nav">
+      <li class="nav-item title-name">SCHOOL</li>
+      <li class="nav-item title-name-bold">KKD</li>
+    </ul>
+    <ul class="nav-list right-nav">
+      <li class="nav-item">About</li>
+      <li class="nav-item">Contact Us</li>
+    </ul>
+  </div>
+
+  <div class="wrapper">
+    <iframe src="sidebar.html" class="sidebar-frame"></iframe>
+  </div>
+
+  <div class="content">
+    <div class="main-content">
+      <div class="page-header">
+        <h2>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          COURSE PROSPECTUS
+        </h2>
+        <div class="course-summary">
+          <span class="course-name">Computer Science</span>
+          <span class="total-units">Total Units: <span id="totalUnits">0</span></span>
+        </div>
+      </div>
+
+      <div id="prospectusContainer">
+        <!-- Prospectus content will be dynamically loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function loadProspectus() {
+      try {
+        const response = await fetch('/api/prospectus');
+        if (!response.ok) throw new Error('Failed to load prospectus');
+        
+        const prospectus = await response.json();
+        const container = document.getElementById('prospectusContainer');
+        container.innerHTML = '';
+
+        // Calculate total units
+        let totalUnits = 0;
+
+        // Create sections for each year and semester
+        Object.entries(prospectus).forEach(([key, subjects]) => {
+          const section = document.createElement('div');
+          section.className = 'prospectus-section';
+          
+          const header = document.createElement('div');
+          header.className = 'section-header';
+          header.innerHTML = `
+            <h3>${key}</h3>
+            <span class="section-units">${subjects.reduce((sum, sub) => sum + sub.units, 0)} units</span>
+          `;
+          
+          const subjectsList = document.createElement('div');
+          subjectsList.className = 'subjects-list';
+          
+          subjects.forEach(subject => {
+            totalUnits += subject.units;
+            const subjectCard = document.createElement('div');
+            subjectCard.className = 'subject-card';
+            subjectCard.innerHTML = `
+              <div class="subject-header">
+                <h4>${subject.subject_code}</h4>
+                <span class="units">${subject.units} units</span>
+              </div>
+              <h5>${subject.subject_name}</h5>
+              <p>${subject.description}</p>
+              <div class="schedule">
+                <span class="schedule-info">Schedule to be announced</span>
+              </div>
+            `;
+            subjectsList.appendChild(subjectCard);
+          });
+          
+          section.appendChild(header);
+          section.appendChild(subjectsList);
+          container.appendChild(section);
+        });
+
+        // Update total units
+        document.getElementById('totalUnits').textContent = totalUnits;
+      } catch (error) {
+        console.error('Error loading prospectus:', error);
+        const container = document.getElementById('prospectusContainer');
+        container.innerHTML = `
+          <div class="error-message">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <p>Failed to load prospectus. Please try again later.</p>
+          </div>
+        `;
+      }
+    }
+
+    // Load prospectus when page loads
+    window.onload = loadProspectus;
+  </script>
+</body>
+</html>

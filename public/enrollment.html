@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enrollment</title>
+  <link rel="stylesheet" href="enrollment.css">
+  <link rel="stylesheet" href="sidebar.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="top-navbar">
+    <ul class="nav-list left-nav">
+      <li class="nav-item title-name">SCHOOL</li>
+      <li class="nav-item title-name-bold">KKD</li>
+    </ul>
+    <ul class="nav-list right-nav">
+      <li class="nav-item">About</li>
+      <li class="nav-item">Contact Us</li>
+    </ul>
+  </div>
+
+  <div class="wrapper" id="sidebarWrapper">
+    <iframe src="sidebar.html" class="sidebar-frame"></iframe>
+  </div>
+
+  <div class="content" id="mainContent">
+    <div class="left-container" id="leftContainer">
+      <div class="expand-toggle" onclick="toggleLeftContainer()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </div>
+      <div class="left-content">
+        <h3>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          Steps
+        </h3>
+        <div class="steps-container">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">Updating of Personal Details</div>
+              <div class="step-description">Update your personal information</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">Admin Evaluation and Approval</div>
+              <div class="step-description">Wait for admin verification</div>
+            </div>
+          </div>
+          <div class="step active">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">Subject Selection</div>
+              <div class="step-description">Choose your desired subjects</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <div class="step-title">Subjects Approval</div>
+              <div class="step-description">Wait for subject approval</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <div class="step-title">Officially Enrolled</div>
+              <div class="step-description">Complete enrollment process</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-content">
+      <h2>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
+          <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+        </svg>
+        Subject Selection
+      </h2>
+      
+      <div class="prospectus-box">
+        <div class="prospectus-header" onclick="toggleProspectus()">
+          <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+            Prospectus <span id="toggleIcon">−</span>
+          </h1>
+        </div>
+        <p class="section-description">Browse through available subjects for your current semester.</p>
+        <table class="prospectus-table" id="prospectusTable">
+          <thead>
+            <tr>
+              <th>Subject Code</th>
+              <th>Description</th>
+              <th>Units</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="prospectusTableBody">
+            <!-- Dynamically filled -->
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="enrollment-box">
+        <h1>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
+            <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+          </svg>
+          Chosen Subjects
+        </h1>
+        <p class="section-description">Review your selected subjects and their schedules.</p>
+        <table class="enrollment-table">
+          <thead>
+            <tr>
+              <th>EDP Code</th>
+              <th>Subject Code</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Days</th>
+              <th>Room</th>
+              <th>Units</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="enrollmentTableBody">
+            <tr class="placeholder-row">
+              <td colspan="8">No subjects added yet.</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="save-container">
+          <button class="enrollment-save-btn" onclick="submitEnrollment()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+              <polyline points="17 21 17 13 7 13 7 21"></polyline>
+              <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+            Save Enrollment
+          </button>
+        </div>
+      </div>
+
+      <div id="scheduleModal" class="modal">
+        <div class="modal-content">
+          <span class="close-btn" onclick="closeModal()">&times;</span>
+          <h2>Select a Schedule for <span id="selectedSubjectCode"></span></h2>
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>EDP Code</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Days</th>
+                <th>Room</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="scheduleTableBody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Global variables to store student and subject data
+    let studentData = {};
+    let subjectSchedules = {};
+    
+    // Initialize page with student data and subjects
+    window.onload = async function() {
+      await fetchStudentInfo();
+    };
+    
+    async function fetchStudentInfo() {
+      try {
+        const username = localStorage.getItem("username");
+        if (!username) {
+          window.location.href = "login.html";
+          return;
+        }
+        
+        const response = await fetch(`/userinfo?username=${username}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch student information");
+        }
+        
+        studentData = await response.json();
+        
+        // Save student ID for enrollment
+        localStorage.setItem("student_id", studentData.student_id);
+        
+        // Fetch subjects after student data is loaded
+        await fetchSubjectsForSemester();
+      } catch (error) {
+        console.error("Error fetching student info:", error);
+        alert("Unable to load student information. Please try again later.");
+      }
+    }
+    
+    async function fetchSubjectsForSemester() {
+      try {
+        // Get the year level from student data
+        const yearLevel = parseInt(studentData.year_level) || 1;
+        // Always use semester 1
+        const semester = 1;
+        
+        const courseCode = studentData.course || 'CS'; // Default to CS if not available
+        
+        const response = await fetch(`/api/subjects-for-semester?course=${courseCode}&year=${yearLevel}&semester=${semester}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch subjects for semester");
+        }
+        
+        const data = await response.json();
+        populateProspectusTable(data);
+      } catch (error) {
+        console.error("Error fetching subjects:", error);
+        alert("Unable to load subjects. Please try again later.");
+      }
+    }
+    
+    function populateProspectusTable(subjects) {
+      const tableBody = document.getElementById("prospectusTableBody");
+      tableBody.innerHTML = "";
+      
+      // Clear existing subject schedules
+      subjectSchedules = {};
+      
+      if (subjects.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="4">No subjects available for this semester.</td></tr>`;
+        return;
+      }
+
+      subjects.forEach(subject => {
+        const { subject_code, subject_name, description, units, schedules } = subject;
+        
+        // Store schedules for use in modal
+        subjectSchedules[subject_code] = schedules;
+        
+        const displayUnits = units || (schedules && schedules.length > 0 ? schedules[0].units : 0);
+        const row = `
+          <tr>
+            <td>${subject_code}</td>
+            <td>${description || subject_name}</td>
+            <td>${displayUnits}</td>
+            <td>
+              <button class="add-btn" onclick="openScheduleModal('${subject_code}')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                Add
+              </button>
+            </td>
+          </tr>
+        `;
+        tableBody.innerHTML += row;
+      });
+    }
+
+    function toggleProspectus() {
+      const table = document.getElementById("prospectusTable");
+      const toggleIcon = document.getElementById("toggleIcon");
+      table.style.display = table.style.display === "none" ? "table" : "none";
+      toggleIcon.textContent = table.style.display === "none" ? "+" : "−";
+    }
+
+    function openScheduleModal(subjectCode) {
+      document.getElementById('selectedSubjectCode').textContent = subjectCode;
+      const schedules = subjectSchedules[subjectCode] || [];
+      const scheduleTableBody = document.getElementById('scheduleTableBody');
+      scheduleTableBody.innerHTML = "";
+
+      if (schedules.length === 0) {
+        scheduleTableBody.innerHTML = '<tr><td colspan="6">No schedules available for this subject.</td></tr>';
+      } else {
+        schedules.forEach(schedule => {
+          const row = `
+            <tr>
+              <td>${schedule.edp_code}</td>
+              <td>${schedule.start_time}</td>
+              <td>${schedule.end_time}</td>
+              <td>${schedule.days}</td>
+              <td>${schedule.room || 'TBA'}</td>
+              <td>
+                <button class="add-btn" onclick="addScheduleToEnrollment('${schedule.edp_code}', '${subjectCode}', '${schedule.start_time}', '${schedule.end_time}', '${schedule.days}', '${schedule.room || 'TBA'}', ${schedule.units})">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                  Choose
+                </button>
+              </td>
+            </tr>
+          `;
+          scheduleTableBody.innerHTML += row;
+        });
+      }
+
+      document.getElementById('scheduleModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('scheduleModal').style.display = 'none';
+    }
+
+    function addScheduleToEnrollment(edpCode, subjectCode, startTime, endTime, days, room, units) {
+      const tableBody = document.getElementById('enrollmentTableBody');
+      const placeholderRow = document.querySelector('.placeholder-row');
+      if (placeholderRow) placeholderRow.remove();
+
+      // Check for schedule conflicts before adding
+      if (hasScheduleConflict(startTime, endTime, days)) {
+        alert("This schedule conflicts with another subject you've already selected. Please choose a different schedule.");
+        return;
+      }
+
+      const newRow = `
+        <tr>
+          <td>${edpCode}</td>
+          <td>${subjectCode}</td>
+          <td>${startTime}</td>
+          <td>${endTime}</td>
+          <td>${days}</td>
+          <td>${room}</td>
+          <td>${units}</td>
+          <td>
+            <button class="remove-btn" onclick="removeRow(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+              </svg>
+              Remove
+            </button>
+          </td>
+        </tr>
+      `;
+      tableBody.innerHTML += newRow;
+      closeModal();
+    }
+
+    function hasScheduleConflict(newStartTime, newEndTime, newDays) {
+      // Get all current schedule rows
+      const rows = document.querySelectorAll('#enrollmentTableBody tr:not(.placeholder-row)');
+      const newDaysArray = newDays.split('');
+      
+      // Convert time strings to comparable values (minutes since midnight)
+      const newStart = timeToMinutes(newStartTime);
+      const newEnd = timeToMinutes(newEndTime);
+      
+      for (let row of rows) {
+        const cells = row.querySelectorAll('td');
+        const startTime = timeToMinutes(cells[2].innerText);
+        const endTime = timeToMinutes(cells[3].innerText);
+        const days = cells[4].innerText.split('');
+        
+        // Check for day overlap
+        const dayOverlap = newDaysArray.some(day => days.includes(day));
+        
+        if (dayOverlap) {
+          // Check for time overlap
+          if ((newStart >= startTime && newStart < endTime) || 
+              (newEnd > startTime && newEnd <= endTime) || 
+              (newStart <= startTime && newEnd >= endTime)) {
+            return true; // Conflict found
+          }
+        }
+      }
+      
+      return false; // No conflict
+    }
+
+    function timeToMinutes(timeStr) {
+      // Convert "HH:MM AM/PM" to minutes since midnight
+      const [time, period] = timeStr.split(' ');
+      let [hours, minutes] = time.split(':').map(Number);
+      
+      if (period === 'PM' && hours < 12) hours += 12;
+      if (period === 'AM' && hours === 12) hours = 0;
+      
+      return hours * 60 + minutes;
+    }
+
+    function removeRow(button) {
+      const row = button.parentElement.parentElement;
+      row.remove();
+
+      const tableBody = document.getElementById('enrollmentTableBody');
+      if (tableBody.children.length === 0) {
+        tableBody.innerHTML = '<tr class="placeholder-row"><td colspan="8">No subjects added yet.</td></tr>';
+      }
+    }
+
+    function submitEnrollment() {
+      const studentId = localStorage.getItem("student_id");
+      if (!studentId) {
+        alert("Student ID not found. Please log in again.");
+        window.location.href = "login.html";
+        return;
+      }
+
+      const rows = document.querySelectorAll('#enrollmentTableBody tr:not(.placeholder-row)');
+      const enrollments = [];
+
+      // Gather all enrollment details from the table
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length > 0) {
+          const edpCode = cells[0].innerText;
+          const subjectCode = cells[1].innerText;
+
+          enrollments.push({
+            stud_id: studentId,
+            subject_code: subjectCode,
+            edp_code: edpCode,
+            status: "PENDING"
+          });
+        }
+      });
+
+      if (enrollments.length === 0) {
+        alert("Please select at least one subject to enroll.");
+        return;
+      }
+
+      // Send all enrollments as one POST request
+      fetch("/enroll", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ enrollments: enrollments })
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return response.json().then(data => {
+            throw new Error(data.message || "Error submitting enrollment");
+          });
+        }
+      })
+      .then(data => {
+        console.log("Enrollment process completed:", data);
+        alert("Enrollment submitted successfully! Your subjects are now pending approval.");
+        // Redirect to a confirmation page or refresh current page
+        window.location.reload();
+      })
+      .catch(error => {
+        console.error("Error:", error.message);
+        alert(`Error during enrollment process: ${error.message}`);
+      });
+    }
+
+    function toggleLeftContainer() {
+      const container = document.getElementById('leftContainer');
+      container.classList.toggle('collapsed');
+    }
+
+    function toggleSidebar() {
+      const wrapper = document.getElementById('sidebarWrapper');
+      const content = document.getElementById('mainContent');
+      wrapper.classList.toggle('hidden');
+      content.classList.toggle('sidebar-hidden');
+    }
+  </script>
+</body>
+</html>

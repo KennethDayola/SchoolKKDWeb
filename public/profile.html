@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="sidebar.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="top-navbar">
+    <ul class="nav-list left-nav">
+    
+      <li class="nav-item title-name">SCHOOL</li>
+      <li class="nav-item title-name-bold">KKD</li>
+    </ul>
+    <ul class="nav-list right-nav">
+      <li class="nav-item">About</li>
+      <li class="nav-item">Contact Us</li>
+    </ul>
+  </div>
+
+  <div class="wrapper" id="sidebarWrapper">
+    <iframe src="sidebar.html" class="sidebar-frame"></iframe>
+  </div>
+
+  <div class="content">
+    <div class="profile-header">
+      <div class="profile-left">
+        <div class="profile-image-container">
+          <img class="prof-pic-main" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Profile Picture">
+          <button class="update-profile-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="profile-info">
+          <h2 id="fullname">N/A</h2>
+          <p class="student-id">ID: <span id="student_id">N/A</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-sections">
+      <div class="section personal-details">
+        <h3>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          Personal Details
+        </h3>
+        <div class="details-grid">
+          <div class="detail">
+            <span class="detail-label">First Name</span>
+            <span class="detail-value" id="firstname">N/A</span>
+          </div>
+          <div class="detail">
+            <span class="detail-label">Middle Name</span>
+            <span class="detail-value" id="middlename">N/A</span>
+          </div>
+          <div class="detail">
+            <span class="detail-label">Last Name</span>
+            <span class="detail-value" id="lastname">N/A</span>
+          </div>
+          <div class="detail">
+            <span class="detail-label">Email</span>
+            <span class="detail-value" id="email">N/A</span>
+          </div>
+          <div class="detail">
+            <span class="detail-label">Mobile #</span>
+            <span class="detail-value" id="mobile">N/A</span>
+          </div>
+          <div class="detail">
+            <span class="detail-label">Birthdate</span>
+            <span class="detail-value" id="birthdate">N/A</span>
+          </div>
+          <div class="detail">
+            <span class="detail-label">Gender</span>
+            <span class="detail-value" id="gender">N/A</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section academic-details">
+        <h3>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          Academic Details
+        </h3>
+        <div class="details-grid">
+          <div class="detail">
+            <span class="detail-label">Year Level</span>
+            <span class="detail-value" id="year_level">N/A</span>
+          </div>
+          <div class="detail">
+            <span class="detail-label">Classification</span>
+            <span class="detail-value" id="classification">N/A</span>
+          </div>
+          <div class="detail">
+            <span class="detail-label">College</span>
+            <span class="detail-value" id="college">N/A</span>
+          </div>
+          <div class="detail">
+            <span class="detail-label">Course</span>
+            <span class="detail-value" id="course">N/A</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const username = localStorage.getItem("username");
+   
+    if (!username) {
+      alert("Unauthorized! Please log in first.");
+      window.location.href = "login.html";
+    } else {
+      fetch(`https://astonishing-unruly-tomato.glitch.me/userinfo?username=${username}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            alert(data.error);
+            localStorage.clear();
+            window.location.href = "login.html";
+          } else {
+            document.getElementById("firstname").innerText = data.firstname || "N/A";
+            document.getElementById("middlename").innerText = data.middlename || "N/A";
+            document.getElementById("lastname").innerText = data.lastname || "N/A";
+            document.getElementById("year_level").innerText = data.year_level || "N/A";
+            document.getElementById("classification").innerText = data.classification || "N/A";
+            document.getElementById("college").innerText = data.college || "N/A";
+            document.getElementById("course").innerText = data.course || "N/A";
+            document.getElementById("student_id").innerText = data.student_id || "N/A";
+            document.getElementById("email").innerText = data.email || "N/A";
+            document.getElementById("mobile").innerText = data.mobile || "N/A";
+            document.getElementById("birthdate").innerText = data.birthdate || "N/A";
+            document.getElementById("gender").innerText = data.gender || "N/A";
+            document.getElementById("fullname").innerText = data.firstname + " " + data.middlename + " " + data.lastname || "N/A";
+
+            localStorage.setItem("student_id", data.student_id);
+          }
+        })
+        .catch(error => console.error("Error:", error));
+    }
+  </script>
+</body>
+</html>

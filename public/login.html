@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="accounts.css" />
+</head>
+<body>
+ 
+  
+<div class="container">
+        <img src="https://cdn-icons-png.flaticon.com/128/4733/4733470.png" alt="Graduation" class="logo">
+  <div class="title">School <span style="font-weight:700;">KKD </span></div>
+        <form id="login-form">
+            <label>Username</label>
+            <input type="text" id="username" placeholder="Enter Username">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Enter Password">
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+
+ <script>
+document.getElementById("login-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    document.querySelectorAll(".error").forEach(e => e.remove());
+
+    let isValid = true;
+
+    function showError(inputId, message) {
+        const inputField = document.getElementById(inputId);
+        const error = document.createElement("p");
+        error.className = "error";
+        error.style.color = "red";
+        error.style.fontSize = "12px";
+        error.textContent = message;
+        inputField.parentNode.appendChild(error);
+        isValid = false;
+    }
+
+    if (username.length < 4) {
+        showError("username", "Username must be at least 4 characters");
+    }
+
+    if (password.length < 4) {
+        showError("password", "Password must be at least 4 characters");
+    }
+
+    if (!isValid) return;
+
+    try {
+        // 🔐 Login
+        const loginRes = await fetch("https://astonishing-unruly-tomato.glitch.me/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+        });
+
+        if (!loginRes.ok) {
+            const errorData = await loginRes.json();
+            throw new Error(errorData.message || "Invalid credentials");
+        }
+
+        const loginData = await loginRes.json();
+        alert(loginData.message);
+
+        // 🔍 Fetch user info
+        const userInfoRes = await fetch(`https://astonishing-unruly-tomato.glitch.me/userinfo?username=${encodeURIComponent(username)}`);
+        if (!userInfoRes.ok) {
+            throw new Error("Failed to fetch user information");
+        }
+
+        const user = await userInfoRes.json();
+
+        // 💾 Save to localStorage
+        localStorage.setItem("username", user.username);
+        localStorage.setItem("studentId", user.student_id); // adjust field names if needed
+        localStorage.setItem("firstName", user.first_name);
+        localStorage.setItem("middleName", user.middle_name);
+        localStorage.setItem("lastName", user.last_name);
+
+        // ✅ Redirect
+        window.location.href = "dashboard.html";
+
+    } catch (error) {
+        showError("username", error.message);
+    }
+});
+</script>
+</body>
+</html>
